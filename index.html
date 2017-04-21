@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game</title>
+    <style>
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- Dependencies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.js"></script>
+<script>
+  require.config({
+    paths: {
+      "react": "node_modules/react/dist/react",
+      "react-dom": "node_modules/react-dom/dist/react-dom",
+      "lodash": "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min"
+    }
+  })
+  require(['./.dist/bundle.js'], function() {
+    require(['main'])
+  })
+
+</script>
+</body>
+</html>

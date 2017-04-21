@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+  "target": "es5",
+  "module": "commonjs",
+  "baseUrl": "types",
+  "typeRoots": ["types"],
+  "isolatedModules": false,
+  "jsx": "react",
+  "experimentalDecorators": true,
+  "emitDecoratorMetadata": true,
+  "declaration": false,
+  "noImplicitAny": true,
+  "removeComments": true,
+  "noLib": false,
+  "preserveConstEnums": true,
+  "suppressImplicitAnyIndexErrors": true,
+  "moduleResolution": "node"
+  },
+  "compileOnSave": false
+}
