@@ -47,7 +47,7 @@ describe('pathFinder', () => {
         const path = pathFinder(map, startTile, endTile)
         expect(path[0]).to.eql(startTile)
         expect(path[path.length - 1]).to.eql(endTile)
-        console.log(path)
+        //console.log(path)
         expect(path.length).to.equal((tilesQ * 2) - 1)
       })();
       // [0, 0] to [5, 5]
@@ -57,7 +57,7 @@ describe('pathFinder', () => {
         const path = pathFinder(map, startTile, endTile)
         expect(path[0]).to.eql(startTile)
         expect(path[path.length - 1]).to.eql(endTile)
-        console.log(path)
+        //console.log(path)
         expect(path.length).to.equal(11)
       })();
       // [0, 0] to [0, 9]
@@ -67,7 +67,7 @@ describe('pathFinder', () => {
         const path = pathFinder(map, startTile, endTile)
         expect(path[0]).to.eql(startTile)
         expect(path[path.length - 1]).to.eql(endTile)
-        console.log(path)
+        //console.log(path)
         expect(path.length).to.equal(tilesQ)
       })();
     });
