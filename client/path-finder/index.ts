@@ -3,12 +3,8 @@ import {MapSet, MinHeapSet} from './sets'
 import {PathFindingNode} from './node.class'
 
 export type Tile = [number, number]
-// TODO: Get rowsQ and colsQ from the passed tileMap
-//const rowsQ = 10
-//const colsQ = 10
 
 // TODO: Implement obstacles with a second layer of tiles
-// TODO: Fix issues with some paths
 export function pathFinder(tileMap: any[][], startTile: Tile, endTile: Tile, callback?){
   const closedSet = new MapSet<PathFindingNode>()
   const openSet = new MinHeapSet<PathFindingNode>()
