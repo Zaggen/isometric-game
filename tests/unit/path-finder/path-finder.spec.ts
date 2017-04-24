@@ -47,7 +47,6 @@ describe('pathFinder', () => {
         const path = pathFinder(map, startTile, endTile)
         expect(path[0]).to.eql(startTile)
         expect(path[path.length - 1]).to.eql(endTile)
-        //console.log(path)
         expect(path.length).to.equal((tilesQ * 2) - 1)
       })();
       // [0, 0] to [5, 5]
@@ -57,8 +56,36 @@ describe('pathFinder', () => {
         const path = pathFinder(map, startTile, endTile)
         expect(path[0]).to.eql(startTile)
         expect(path[path.length - 1]).to.eql(endTile)
-        //console.log(path)
         expect(path.length).to.equal(11)
+      })();
+      // [0, 0] to [9, 0]
+      (() => {
+        const startTile: Tile = [0, 0]
+        const endTile: Tile = [9, 0]
+        const path = pathFinder(map, startTile, endTile)
+        expect(path[0]).to.eql(startTile)
+        expect(path[path.length - 1]).to.eql(endTile)
+        expect(path.length).to.equal(tilesQ)
+      })();
+      // [0, 0] to [8, 2]
+      (() => {
+        const startTile: Tile = [0, 0]
+        const endTile: Tile = [8, 2]
+        const path = pathFinder(map, startTile, endTile)
+        expect(path[0]).to.eql(startTile)
+        expect(path[path.length - 1]).to.eql(endTile)
+        console.log(path)
+        expect(path.length).to.equal(endTile.reduce((a, b) => a + b, 0) + 1)
+      })();
+      // [0, 0] to [9, 6]
+      (() => {
+        const startTile: Tile = [0, 0]
+        const endTile: Tile = [9, 6]
+        const path = pathFinder(map, startTile, endTile)
+        expect(path[0]).to.eql(startTile)
+        expect(path[path.length - 1]).to.eql(endTile)
+        console.log(path)
+        expect(path.length).to.equal(endTile.reduce((a, b) => a + b, 0) + 1)
       })();
       // [0, 0] to [0, 9]
       (() => {
@@ -67,8 +94,7 @@ describe('pathFinder', () => {
         const path = pathFinder(map, startTile, endTile)
         expect(path[0]).to.eql(startTile)
         expect(path[path.length - 1]).to.eql(endTile)
-        //console.log(path)
-        expect(path.length).to.equal(tilesQ)
+        expect(path.length).to.equal(endTile.reduce((a, b) => a + b, 0) + 1)
       })();
     });
   })
