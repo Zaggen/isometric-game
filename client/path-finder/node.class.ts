@@ -17,6 +17,8 @@ export class PathFindingNode {
       return -1
     else if(this.f > b.f)
       return 1
+    else if(this.h < b.h)
+      return -1
     else
       return 0
   }
