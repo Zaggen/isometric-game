@@ -3,7 +3,10 @@ import * as _ from 'lodash'
 import {pathFinder, Tile} from '../../../client/path-finder/index'
 
 describe('pathFinder', () => {
-  describe('small map 6*6', ()=> {
+  function getMinPathLen(startTile, endTile){
+    return endTile.reduce((a, b) => a + b, 0) + 1
+  }
+  describe('small sized map 6*6', ()=> {
     it('should return an array with the shortest path between to tiles', () => {
       // We generate the map manually for illustrative purposes
       // This is a 6 * 6 tile map
@@ -22,7 +25,7 @@ describe('pathFinder', () => {
         const path = pathFinder(map, startTile, endTile)
         expect(path[0]).to.eql(startTile)
         expect(path[path.length - 1]).to.eql(endTile)
-        expect(path.length).to.equal(11) // In this case the number corresponds to (tilesQ * 2) - 1
+        expect(path.length).to.equal(getMinPathLen(startTile, endTile))
       })();
       // [0, 0] to [0, 5]
       (() => {
@@ -31,12 +34,12 @@ describe('pathFinder', () => {
         const path = pathFinder(map, startTile, endTile)
         expect(path[0]).to.eql(startTile)
         expect(path[path.length - 1]).to.eql(endTile)
-        expect(path.length).to.equal(6)
+        expect(path.length).to.equal(getMinPathLen(startTile, endTile))
       })();
     });
   })
 
-  describe('big map 10*10', ()=> {
+  describe('medium sized map 10*10', ()=> {
     it('should return an array with the shortest path between to tiles', () => {
       const tilesQ = 10
       const map: any[][] =  _.times(tilesQ, ()=> _.times(tilesQ));
@@ -47,7 +50,7 @@ describe('pathFinder', () => {
         const path = pathFinder(map, startTile, endTile)
         expect(path[0]).to.eql(startTile)
         expect(path[path.length - 1]).to.eql(endTile)
-        expect(path.length).to.equal((tilesQ * 2) - 1)
+        expect(path.length).to.equal(getMinPathLen(startTile, endTile))
       })();
       // [0, 0] to [5, 5]
       (() => {
@@ -56,7 +59,7 @@ describe('pathFinder', () => {
         const path = pathFinder(map, startTile, endTile)
         expect(path[0]).to.eql(startTile)
         expect(path[path.length - 1]).to.eql(endTile)
-        expect(path.length).to.equal(11)
+        expect(path.length).to.equal(getMinPathLen(startTile, endTile))
       })();
       // [0, 0] to [9, 0]
       (() => {
@@ -65,7 +68,7 @@ describe('pathFinder', () => {
         const path = pathFinder(map, startTile, endTile)
         expect(path[0]).to.eql(startTile)
         expect(path[path.length - 1]).to.eql(endTile)
-        expect(path.length).to.equal(tilesQ)
+        expect(path.length).to.equal(getMinPathLen(startTile, endTile))
       })();
       // [0, 0] to [8, 2]
       (() => {
@@ -74,8 +77,7 @@ describe('pathFinder', () => {
         const path = pathFinder(map, startTile, endTile)
         expect(path[0]).to.eql(startTile)
         expect(path[path.length - 1]).to.eql(endTile)
-        console.log(path)
-        expect(path.length).to.equal(endTile.reduce((a, b) => a + b, 0) + 1)
+        expect(path.length).to.equal(getMinPathLen(startTile, endTile))
       })();
       // [0, 0] to [9, 6]
       (() => {
@@ -84,8 +86,7 @@ describe('pathFinder', () => {
         const path = pathFinder(map, startTile, endTile)
         expect(path[0]).to.eql(startTile)
         expect(path[path.length - 1]).to.eql(endTile)
-        console.log(path)
-        expect(path.length).to.equal(endTile.reduce((a, b) => a + b, 0) + 1)
+        expect(path.length).to.equal(getMinPathLen(startTile, endTile))
       })();
       // [0, 0] to [0, 9]
       (() => {
@@ -94,7 +95,32 @@ describe('pathFinder', () => {
         const path = pathFinder(map, startTile, endTile)
         expect(path[0]).to.eql(startTile)
         expect(path[path.length - 1]).to.eql(endTile)
-        expect(path.length).to.equal(endTile.reduce((a, b) => a + b, 0) + 1)
+        expect(path.length).to.equal(getMinPathLen(startTile, endTile))
+      })();
+    });
+  })
+
+  describe('big sized map 100*100', ()=> {
+    it('should return an array with the shortest path between to tiles', () => {
+      const tilesQ = 100
+      const map: any[][] =  _.times(tilesQ, ()=> _.times(tilesQ));
+      // [0, 0] to [9, 9]
+      (() => {
+        const startTile: Tile = [0, 0]
+        const endTile: Tile = [99, 99]
+        const path = pathFinder(map, startTile, endTile)
+        expect(path[0]).to.eql(startTile)
+        expect(path[path.length - 1]).to.eql(endTile)
+        expect(path.length).to.equal(getMinPathLen(startTile, endTile))
+      })();
+      // [0, 0] to [80, 35]
+      (() => {
+        const startTile: Tile = [0, 0]
+        const endTile: Tile = [80, 35]
+        const path = pathFinder(map, startTile, endTile)
+        expect(path[0]).to.eql(startTile)
+        expect(path[path.length - 1]).to.eql(endTile)
+        expect(path.length).to.equal(getMinPathLen(startTile, endTile))
       })();
     });
   })
