@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-import {MinHeapSet} from '../../../client/path-finder/sets'
+import {MinHeapSet, ComparableItemI} from '../../../client/path-finder/sets'
 
-class ComparableItem {
+class ComparableItem implements ComparableItemI {
   constructor(public x: number){}
   compareTo(b: ComparableItem): -1 | 0 | 1 {
     if(this.x < b.x)
@@ -10,6 +10,9 @@ class ComparableItem {
       return 1
     else
       return 0
+  }
+  toString(): string{
+    return Number(this.x).toString()
   }
 }
 
@@ -41,6 +44,24 @@ describe('MinHeapSet', () => {
         const smallestComparableItem = set.removeMin()
         expect(smallestComparableItem.x).to.equal(2)
         expect(set.length).to.equal(comparableItemsArray.length - 1)
+      })
+    })
+    describe('.contains()', ()=> {
+      it('should return true/false if the comparableItem is found/not found on the set', ()=> {
+        const itemToBeFound = new ComparableItem(180)
+        const set = new MinHeapSet<ComparableItem>([34, 799, 17, 2, 16].map((x)=> new ComparableItem(x)))
+        set.add(itemToBeFound)
+        expect(set.contains(itemToBeFound)).to.be.true
+        expect(set.contains(new ComparableItem(199))).to.be.false
+      })
+    })
+    describe('.getItemByKey()', ()=> {
+      it('should return the item as long as the key matches the stringified version of the item in the set', ()=> {
+        const itemToBeFound = new ComparableItem(180)
+        const set = new MinHeapSet<ComparableItem>([34, 799, 17, 2, 16].map((x)=> new ComparableItem(x)))
+        set.add(itemToBeFound)
+        const foundItem = set.getItemByKey(itemToBeFound.toString())
+        expect(foundItem.x).to.equal(itemToBeFound.x)
       })
     })
   })
